@@ -5,6 +5,32 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP DATABASE IF EXISTS `access-control-component`;
+CREATE DATABASE `access-control-component` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `access-control-component`;
+
+DELIMITER ;;
+
+CREATE PROCEDURE `createGroup`(IN `name` varchar(45), IN `description` varchar(200))
+BEGIN
+    DECLARE id_group INT DEFAULT 0;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+       BEGIN
+           ROLLBACK;
+           RESIGNAL;
+       END;
+    START TRANSACTION;
+         INSERT INTO `group`(name, description) VALUES (name, description);
+
+    COMMIT;
+    ROLLBACK;
+END;;
+
+CREATE PROCEDURE `createUser`(IN `name` varchar(45), IN `password` varchar(45))
+INSERT INTO `user`(name, password) VALUES(name, password);;
+
+DELIMITER ;
+
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -62,4 +88,4 @@ CREATE TABLE `user_information` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 
--- 2022-07-12 15:49:13
+-- 2022-07-12 16:20:58
