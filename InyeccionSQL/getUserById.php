@@ -3,7 +3,7 @@
 $host = "localhost";
 $dbname = "nombre_de_la_base_de_datos";
 $username = "root";
-$password = "1071";
+$password = "1234";
 
 try {
   // Crear una nueva instancia de conexión a la base de datos
